@@ -1,0 +1,18 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+max_line_length = 150
+trim_trailing_whitespace = true
+insert_final_newline = true
+indent_style = space
+
+[*.java]
+indent_size = 4
+ij_any_align_multiline_assignment = true
+ij_java_generate_final_parameters = true
+ij_any_align_multiline_parameters = true
+
+[*.md]
+trim_trailing_whitespace = false
