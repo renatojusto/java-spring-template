@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="autoIncrement" value="true"/>
+
+    <changeSet author="renato.justo" id="00000000000001">
+        <createTable tableName="supplier">
+            <column autoIncrement="${autoIncrement}" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="supplier_pk"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_creation" type="timestamp" defaultValueComputed="current_timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_last_update" type="timestamp"/>
+            <column name="version" type="BIGINT" defaultValueComputed="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <loadData
+                file="config/liquibase/data/suppliers.csv"
+                separator=";"
+                tableName="supplier">
+            <column name="name" type="string"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet author="renato.justo" id="00000000000002">
+        <createTable tableName="product">
+            <column autoIncrement="${autoIncrement}" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="product_pk" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity_stock" type="DECIMAL(15, 8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit_price" type="varchar(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="supplier_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_creation" type="timestamp" defaultValueComputed="current_timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_last_update" type="timestamp"/>
+            <column name="version" type="BIGINT" defaultValueComputed="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="product" baseColumnNames="supplier_id"
+                                 constraintName="supplier_product_fk"
+                                 referencedTableName="supplier" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
