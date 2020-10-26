@@ -3,32 +3,29 @@ package com.arch.stock.util.tests;
 import com.arch.stock.util.container.StockContainerFactory;
 import com.arch.stock.util.database.StockDbCleanerExtension;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.util.TestPropertyValues;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.JdbcDatabaseContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@ContextConfiguration(initializers = {SpringIntegrationTests.Initializer.class})
+@SpringBootTest
+@AutoConfigureMockMvc
 @ExtendWith({StockDbCleanerExtension.class, SpringExtension.class})
 @Testcontainers
 public class SpringIntegrationTests {
 
     @Container
-    public static JdbcDatabaseContainer container = StockContainerFactory.getInstance();
+    static JdbcDatabaseContainer container = StockContainerFactory.getInstance();
 
-    static class Initializer
-        implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-        public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-            TestPropertyValues.of(
-                "spring.datasource.url=" + container.getJdbcUrl(),
-                "spring.datasource.username=" + container.getUsername(),
-                "spring.datasource.password=" + container.getPassword()
-            ).applyTo(configurableApplicationContext.getEnvironment());
-        }
+    @DynamicPropertySource
+    static void setContainerProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", container::getJdbcUrl);
+        registry.add("spring.datasource.username", container::getUsername);
+        registry.add("spring.datasource.password", container::getPassword);
     }
 
 }

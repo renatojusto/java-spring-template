@@ -16,8 +16,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Tag("integration")
-@SpringBootTest
-@AutoConfigureMockMvc
 public class SupplierResourceIntegrationTests extends SpringIntegrationTests {
 
     private static final String SUPPLIER_RESOURCE = "/v1/suppliers";
