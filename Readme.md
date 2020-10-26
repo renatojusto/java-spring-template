@@ -10,7 +10,7 @@
 
 O projeto está desenvolvido com a seguinte stack:
 
-* Java 1.8 com Adoptopenjdk
+* Java 11 com OpenJDK
 * Maven e Maven Wrapper 3.6.3
 * Spring Boot 2.3.4 como Framework
 * Spring Web para construir Restful APIs
