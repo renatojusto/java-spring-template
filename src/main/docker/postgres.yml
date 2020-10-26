@@ -13,7 +13,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - archstock-pg-data:/var/lib/postgresql/data:rw
+      - ~/volumes/archstock/postgres/:/var/lib/postgresql/data:rw
     networks:
       - arch-backend-network
 
@@ -30,9 +30,6 @@ services:
     networks:
       - arch-backend-network
     restart: unless-stopped
-
-volumes:
-  archstock-pg-data:
 
 networks:
   arch-backend-network:

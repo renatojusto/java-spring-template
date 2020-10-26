@@ -10,13 +10,22 @@ services:
       # MySql
       # - SPRING_DATASOURCE_URL=jdbc:mysql://arch-mysql:3306/stock?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
       # Postgres
-      - SPRING_DATASOURCE_URL=jdbc:mysql://arch-mysql:3306/stock?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/stock
       - APP_START_SLEEP=30 # gives time for other services to boot before the application
     ports:
       - 8081:8081
     depends_on:
-      - arch-mysql
-  arch-mysql:
+      - arch-postgres
+#      - arch-mysql
+#  arch-mysql:
+#    extends:
+#      file: mysql.yml
+#      service: arch-mysql
+  arch-postgres:
     extends:
-      file: mysql.yml
-      service: arch-mysql
+      file: postgres.yml
+      service: arch-postgres
+
+networks:
+  arch-backend-network:
+    driver: bridge
