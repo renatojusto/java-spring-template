@@ -1,8 +1,9 @@
 package com.arch.stock.resource;
 
 import com.arch.stock.domain.Product;
-import com.arch.stock.util.StockMySQLDbCleanerExtension;
 import com.arch.stock.repository.ProductRepository;
+import com.arch.stock.util.database.StockDbCleanerExtension;
+import com.arch.stock.util.tests.SpringIntegrationTests;
 import org.hamcrest.Matchers;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -31,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Tag("integration")
 @SpringBootTest
 @AutoConfigureMockMvc
-@ExtendWith({StockMySQLDbCleanerExtension.class, SpringExtension.class})
 public class ProductResourceIntegrationTests extends SpringIntegrationTests {
 
     private static final String PRODUCTS_RESOURCE = "/v1/products";

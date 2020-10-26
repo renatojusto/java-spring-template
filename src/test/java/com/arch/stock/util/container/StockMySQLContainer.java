@@ -1,4 +1,4 @@
-package com.arch.stock.util;
+package com.arch.stock.util.container;
 
 import org.testcontainers.containers.MySQLContainer;
 

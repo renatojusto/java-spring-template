@@ -22,7 +22,7 @@ O projeto está desenvolvido com a seguinte stack:
 * Undertown como web server
 * Liquibase para migração de base de dados
 * Logback como framework de log
-* MySQL 8.0.19 como banco de dados
+* MySQL 8.0.19 ou Postgres como banco de dados
 * JUnit5 para testes unitários
 * Mockito para Mock de testes
 * TestContainers para rodar o banco de testes integrados

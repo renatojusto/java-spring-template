@@ -1,6 +1,7 @@
 package com.arch.stock.resource;
 
-import com.arch.stock.util.StockMySQLDbCleanerExtension;
+import com.arch.stock.util.database.StockDbCleanerExtension;
+import com.arch.stock.util.tests.SpringIntegrationTests;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Tag("integration")
 @SpringBootTest
 @AutoConfigureMockMvc
-@ExtendWith({StockMySQLDbCleanerExtension.class, SpringExtension.class})
 public class SupplierResourceIntegrationTests extends SpringIntegrationTests {
 
     private static final String SUPPLIER_RESOURCE = "/v1/suppliers";

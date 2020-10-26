@@ -1,9 +1,9 @@
 package com.arch.stock.service.dto.request;
 
+import com.arch.stock.config.MoneyDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.arch.stock.config.MoneyDeserializer;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;

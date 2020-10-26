@@ -1,9 +1,8 @@
-package com.arch.stock.util;
+package com.arch.stock.util.database;
 
-import org.junit.jupiter.api.extension.BeforeEachCallback;
-import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.MetaDataAccessException;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -11,16 +10,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.jdbc.support.JdbcUtils.extractDatabaseMetaData;
-import static org.springframework.test.context.junit.jupiter.SpringExtension.getApplicationContext;
 
-public class StockMySQLDbCleanerExtension implements BeforeEachCallback {
+@Component("DbCleanerMySQL")
+public class DbCleanerMySQL implements DbCleaner {
 
     private static List<String> TABLES_TO_IGNORE = Arrays.asList("databasechangelog",
                                                                  "databasechangeloglock",
                                                                  "sys_config",
                                                                  "supplier");
 
-    private static void truncateAllTables(JdbcTemplate jdbcTemplate) throws MetaDataAccessException {
+    public void truncateAllTables(JdbcTemplate jdbcTemplate) throws MetaDataAccessException {
         DataSource dataSource = jdbcTemplate.getDataSource();
 
         extractDatabaseMetaData(dataSource, (databaseMetaData) -> {
@@ -38,11 +37,4 @@ public class StockMySQLDbCleanerExtension implements BeforeEachCallback {
             return null;
         });
     }
-
-    @Override
-    public void beforeEach(ExtensionContext extensionContext) throws MetaDataAccessException {
-        JdbcTemplate jdbcTemplate = getApplicationContext(extensionContext).getBean(JdbcTemplate.class);
-        truncateAllTables(jdbcTemplate);
-    }
-
 }

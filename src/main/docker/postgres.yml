@@ -1,0 +1,39 @@
+version: '2'
+services:
+  arch-postgres:
+    image: postgres:12.3-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-archstock}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-archstock}
+      POSTGRES_PRIMARY_USER: postgres
+      POSTGRES_PRIMARY_PASSWORD: yoursecurepassword
+      POSTGRES_DB: ${POSTGRES_DB:-stock}
+      TZ: GMT
+    ports:
+      - 5432:5432
+    volumes:
+      - archstock-pg-data:/var/lib/postgresql/data:rw
+    networks:
+      - arch-backend-network
+
+  # Importante: ao rodar o pgadmin, será necessário registrar a conexão no IP como: host.docker.internal e não localhost
+  arch-pg-db-admin:
+    image: "dpage/pgadmin4:4.22"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "renatoalexandrejusto@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - 16543:80
+    depends_on:
+      - arch-postgres
+    networks:
+      - arch-backend-network
+    restart: unless-stopped
+
+volumes:
+  archstock-pg-data:
+
+networks:
+  arch-backend-network:
+    driver: bridge
