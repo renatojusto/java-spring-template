@@ -7,8 +7,7 @@ import com.fasterxml.jackson.databind.deser.std.NumberDeserializers;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-
-import static java.math.BigDecimal.ROUND_HALF_UP;
+import java.math.RoundingMode;
 
 public class MoneyDeserializer extends JsonDeserializer<BigDecimal> {
 
@@ -20,6 +19,6 @@ public class MoneyDeserializer extends JsonDeserializer<BigDecimal> {
             return BigDecimal.ZERO;
         }
         BigDecimal bd = delegate.deserialize(jsonParser, deserializationContext);
-        return bd.setScale(8, ROUND_HALF_UP);
+        return bd.setScale(8, RoundingMode.HALF_UP);
     }
 }

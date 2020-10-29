@@ -8,8 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-
-import static java.math.BigDecimal.ROUND_HALF_UP;
+import java.math.RoundingMode;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductDecreaseRequest {
@@ -31,7 +30,7 @@ public class ProductDecreaseRequest {
         if (quantity == null) {
             quantity = BigDecimal.ZERO;
         }
-        return quantity.setScale(8, ROUND_HALF_UP);
+        return quantity.setScale(8, RoundingMode.HALF_UP);
     }
 
     public void setQuantity(BigDecimal quantity) {
