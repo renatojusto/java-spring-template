@@ -26,7 +26,7 @@
         <maven-failsafe-plugin.version>3.0.0-M9</maven-failsafe-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <sonar-maven-plugin.version>3.6.1.1688</sonar-maven-plugin.version>
-        <jib-maven-plugin.version>2.0.0</jib-maven-plugin.version>
+        <jib-maven-plugin.version>2.7.0</jib-maven-plugin.version>
 
         <!--Qualidade de Código e Cobertura de Testes-->
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
