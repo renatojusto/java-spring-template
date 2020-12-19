@@ -317,7 +317,7 @@
                     <artifactId>jib-maven-plugin</artifactId>
                     <configuration>
                         <from>
-                            <image>openjdk:11</image>
+                            <image>openjdk:11-jre-slim</image>
                         </from>
                         <to>
                             <image>renatoalejusto/archstock:latest</image>
