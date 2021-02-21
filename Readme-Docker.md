@@ -9,7 +9,7 @@ mvn -f pom.xml -Pprod verify jib:dockerBuild -DskipTests
 
 Para rodar:
 ```
-docker-compose -f src/docker/app.yml up -d
+docker-compose -f src/main/docker/app.yml up -d
 ```
 
 > jib/entrypoint.sh
