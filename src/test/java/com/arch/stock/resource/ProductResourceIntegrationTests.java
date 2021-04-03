@@ -4,15 +4,12 @@ import com.arch.stock.domain.Product;
 import com.arch.stock.repository.ProductRepository;
 import com.arch.stock.util.tests.SpringIntegrationTests;
 import org.hamcrest.Matchers;
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -22,7 +19,10 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -270,7 +270,6 @@ public class ProductResourceIntegrationTests extends SpringIntegrationTests {
         }
     }
 
-    @NotNull
     private String getPostPayload(String productName, String unit, BigDecimal initialStock, long supplierId) {
         try {
             return createPostPayload(productName, unit, initialStock, supplierId);
@@ -288,7 +287,6 @@ public class ProductResourceIntegrationTests extends SpringIntegrationTests {
         return item.toString();
     }
 
-    @NotNull
     private String getPutPayload(String productName, String unit, long supplierId) {
         try {
             return createPutPayload(productName, unit, supplierId);
@@ -305,7 +303,6 @@ public class ProductResourceIntegrationTests extends SpringIntegrationTests {
         return item.toString();
     }
 
-    @NotNull
     private String getIncreaseOrDecreasePayload(BigDecimal quantity) {
         try {
             return createIncreaseOrDecreasePayload(quantity);
